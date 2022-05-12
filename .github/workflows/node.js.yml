@@ -26,5 +26,3 @@ jobs:
     - run: npm ci
     - name: Build depenedencies
     - run: npm run build --if-present
-    - name: Audit and Fix the vulns'
-    - run: npm audit 
