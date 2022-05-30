@@ -1,5 +1,3 @@
-// Sigma Portal
-
 // prop-types is a library for typechecking of props
 import PropTypes from "prop-types";
 
@@ -59,7 +57,7 @@ function Footer({ company, links }) {
             &nbsp;{name}&nbsp;
           </MDTypography>
         </Link>
-        portal.
+        interns.
       </MDBox>
       <MDBox
         component="ul"
@@ -86,10 +84,10 @@ function Footer({ company, links }) {
 
 // Setting default values for the props of Footer
 Footer.defaultProps = {
-  company: { href: "https://www.github.com/crushoverride007/", name: "Matrix-Nexus" },
+  company: { href: "https://www.github.com/crushoverride007/", name: "DP" },
   links: [
-    { href: "https://www.dataprotect.ma/", name: "DataProtect" },
-    { href: "https://www.mouhcinemes.cf", name: "About Us" },
+    { href: "https://www.dataprotect.ma/", name: "Data Protect" },
+    { href: "https://www.mouhcinemes.cf", name: "About " },
   ],
 };
 
