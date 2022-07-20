@@ -12,11 +12,13 @@
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 */
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import "./focuse";
-
+import {UserContext} from "../../../context/usercontext";
+import {signOut} from "firebase/auth";
+import {auth} from "../../../firebase-config";
 // react-router components
-import { useLocation, Link } from "react-router-dom";
+import { useLocation, Link,useNavigate } from "react-router-dom";
 
 // prop-types is a library for typechecking of props.
 import PropTypes from "prop-types";
@@ -31,6 +33,8 @@ import Icon from "@mui/material/Icon";
 // Sigma React components
 import MDBox from "components/MDBox";
 import MDInput from "components/MDInput";
+import LoginIcon from '@mui/icons-material/Login';
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
 
 // Sigma React example components
 import Breadcrumbs from "examples/Breadcrumbs";
@@ -54,6 +58,17 @@ import {
 } from "context";
 
 function DashboardNavbar({ absolute, light, isMini }) {
+  const {toggleModals} = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const logOut = async () => {
+    try {
+      await signOut(auth)
+      navigate("/")
+    } catch {
+      alert("For some reasons we can't deconnect, please check your internet connexion and retry.")
+    }
+  }
   const [navbarType, setNavbarType] = useState();
   const [controller, dispatch] = useMaterialUIController();
   const { miniSidenav, transparentNavbar, fixedNavbar, openConfigurator, darkMode } = controller;
@@ -136,14 +151,17 @@ function DashboardNavbar({ absolute, light, isMini }) {
         {isMini ? null : (
           <MDBox sx={(theme) => navbarRow(theme, { isMini })}>
             <MDBox pr={1}>
-              <MDInput id="Searchid" label="Search here" />
+              <MDInput id="Searchid" label="Search heree" />
             </MDBox>
             <MDBox color={light ? "white" : "inherit"}>
-              <Link to="/authentication/sign-in/basic">
+              <IconButton onClick={() => toggleModals("signIn")}><LoginIcon/></IconButton>
+              <IconButton onClick={() => toggleModals("signUp")}><PersonAddIcon/></IconButton>
+              {/* <Link to="/authentication/sign-in/basic">
                 <IconButton sx={navbarIconButton} size="small" disableRipple>
                   <Icon sx={iconsStyle}>account_circle</Icon>
                 </IconButton>
-              </Link>
+              </Link> */}
+
               <IconButton
                 size="small"
                 disableRipple
